@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonBack;
     Button buttonLeftBrace;
     Button buttonRightBrace;
-//    Button buttonPercent;
-//    Button buttonSqrt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,12 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_right_brace:
                 expression = expression.concat(")");
                 break;
-//            case R.id.button_percent:
-//                expression = expression.concat("%");
-//                break;
-//            case R.id.button_sqrt:
-//                expression = expression.concat("sqrt");
-//                break;
             case R.id.button_comma:
                 if (!comma) {
                     expression = expression.concat(".");
@@ -214,12 +205,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initAdditionalFields() {
         buttonLeftBrace = (Button) findViewById(R.id.button_left_brace);
         buttonRightBrace = (Button) findViewById(R.id.button_right_brace);
-//        buttonPercent = (Button) findViewById(R.id.button_percent);
-//        buttonSqrt = (Button) findViewById(R.id.button_sqrt);
 
         buttonLeftBrace.setOnClickListener(this);
         buttonRightBrace.setOnClickListener(this);
-//        buttonPercent.setOnClickListener(this);
-//        buttonSqrt.setOnClickListener(this);
     }
 }

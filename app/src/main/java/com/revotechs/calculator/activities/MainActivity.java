@@ -63,12 +63,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initAdditionalFields();
         }
 
-        String oldExpression = getIntent().getStringExtra("expression");
-        if (oldExpression != null) expression = oldExpression;
-
         resultView.setText(String.valueOf(calculator.calc(expression)));
         currentView.setText(String.valueOf(expression));
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {
+            return;
+        }
+        expression = data.getStringExtra("expression");
+        resultView.setText(String.valueOf(calculator.calc(expression)));
+        currentView.setText(String.valueOf(expression));
     }
 
     @Override

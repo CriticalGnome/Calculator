@@ -47,15 +47,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         historyItemHolder.expressionTextView.setText(item.getExpression());
         historyItemHolder.resultTextView.setText(item.getResult());
         historyItemHolder.itemView.setBackgroundColor(position%2 == 0 ? Color.WHITE : Color.LTGRAY);
-        historyItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), MainActivity.class);
-                i.putExtra("expression", item.getExpression());
-                v.getContext().startActivity(i);
-            }
-        });
-
     }
 
     @Override

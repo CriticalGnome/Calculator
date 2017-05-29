@@ -19,7 +19,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
+        android:fontFamily="monospace"
+        android:text="@string/result_text"
         android:textAlignment="textEnd"
+        android:textAllCaps="true"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.0"
@@ -36,7 +39,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="monospace"
+        android:text="@string/expression_text"
         android:textAlignment="textEnd"
+        android:textAllCaps="true"
         android:textAppearance="@android:style/TextAppearance.Material.Title"
         android:textSize="36sp"
         app:layout_constraintHorizontal_bias="1.0"
@@ -62,8 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_1"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_2"
@@ -71,8 +78,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_2"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_3"
@@ -80,8 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_3"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_add"
@@ -89,8 +98,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/add"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -111,8 +121,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_4"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_5"
@@ -120,8 +131,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_5"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_6"
@@ -129,8 +141,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_6"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_sub"
@@ -138,8 +151,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/sub"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -160,8 +174,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_7"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_8"
@@ -169,8 +184,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_8"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_9"
@@ -178,8 +194,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_9"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_mul"
@@ -187,8 +204,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/mul"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -209,8 +227,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/reset"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_0"
@@ -218,8 +237,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/_0"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_comma"
@@ -227,8 +247,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/comma"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_div"
@@ -236,8 +257,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="@string/div"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -261,8 +283,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:fontFamily="monospace"
             android:text="@string/equal"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_back"
@@ -270,7 +293,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/back" />
+            android:fontFamily="monospace"
+            android:text="@string/back"
+            android:textSize="24sp"/>
 
     </LinearLayout>
 

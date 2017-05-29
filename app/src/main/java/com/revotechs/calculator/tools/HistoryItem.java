@@ -1,6 +1,8 @@
 package com.revotechs.calculator.tools;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Project Calculator
@@ -12,17 +14,18 @@ import java.util.Date;
 
 public class HistoryItem {
 
-    private Date date;
+    private String date;
     private String expression;
     private String result;
 
     public HistoryItem(Date date, String expression, String result) {
-        this.date = date;
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault());
+        this.date = sdf.format(date);
         this.expression = expression;
         this.result = result;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 

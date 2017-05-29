@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Калькулятор</string>
+    <string name="exit">Выход</string>
+    <string name="expression">выражение</string>
+    <string name="expression_text">Выражение</string>
+    <string name="result">результат</string>
+    <string name="result_text">Результат</string>
+</resources>

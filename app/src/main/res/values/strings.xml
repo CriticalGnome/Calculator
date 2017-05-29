@@ -1,30 +1,30 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="_0">0</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="add">+</string>
-    <string name="sub">-</string>
-    <string name="mul">*</string>
-    <string name="div">/</string>
-    <string name="reset">C</string>
-    <string name="comma">,</string>
-    <string name="equal"> = </string>
-    <string name="textview">0</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="_9" translatable="false">9</string>
+    <string name="add" translatable="false">+</string>
+    <string name="sub" translatable="false">-</string>
+    <string name="mul" translatable="false">*</string>
+    <string name="div" translatable="false">/</string>
+    <string name="reset" translatable="false">C</string>
+    <string name="comma" translatable="false">,</string>
+    <string name="equal" translatable="false"> = </string>
+    <string name="textview" translatable="false">0</string>
     <string name="exit">Exit</string>
-    <string name="left_brace">(</string>
-    <string name="right_brace">)</string>
-    <string name="percent">%</string>
-    <string name="sqrt">√</string>
-    <string name="back"><![CDATA[<<]]></string>
-    <string name="date">date</string>
+    <string name="left_brace" translatable="false">(</string>
+    <string name="right_brace" translatable="false">)</string>
+    <string name="back" translatable="false"><![CDATA[<<]]></string>
+    <string name="date" translatable="false">date</string>
     <string name="expression">expression</string>
     <string name="result">result</string>
+    <string name="result_text">Result</string>
+    <string name="expression_text">Expression</string>
 </resources>

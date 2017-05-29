@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -26,9 +27,8 @@ public class HistoryActivity extends AppCompatActivity {
         final RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         historyView.setLayoutManager(manager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(HistoryKeeper.getList());
+        final RecyclerViewAdapter adapter = new RecyclerViewAdapter(HistoryKeeper.getList());
         historyView.setAdapter(adapter);
-
         historyView.addOnItemTouchListener(new RecyclerItemClickListener(historyView.getContext(), historyView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -37,24 +37,26 @@ public class HistoryActivity extends AppCompatActivity {
                 intent.putExtra("expression", expression);
                 setResult(RESULT_OK, intent);
                 finish();
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
             }
 
             @Override
-            public void onLongItemClick(View view, int position) {
+            public void onLongItemClick(final View view, final int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(historyView.getContext());
                 builder
                         .setMessage("Delete history item?")
                         .setCancelable(false)
-                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
                         .setNegativeButton("no", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
+                            }
+                        })
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                HistoryKeeper.getList().remove(position);
+                                adapter.notifyItemRemoved(position);
                             }
                         });
                 AlertDialog alert = builder.create();

@@ -13,7 +13,6 @@ import com.revotechs.calculator.tools.Calculator;
 import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.tools.HistoryKeeper;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -160,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.current_vew:
                 Intent intent = new Intent(this, HistoryActivity.class);
                 startActivityForResult(intent, 404);
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                 break;
             default:
                 break;

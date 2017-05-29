@@ -148,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.current_vew:
-                Intent i = new Intent(this, HistoryActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(this, HistoryActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

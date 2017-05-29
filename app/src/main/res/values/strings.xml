@@ -23,4 +23,7 @@
     <string name="result_text">Result</string>
     <string name="expression_text">Expression</string>
     <string name="date">date</string>
+    <string name="confirm_delete">Item will be deleted</string>
+    <string name="cancel">Cancel</string>
+    <string name="OK" translatable="false">OK</string>
 </resources>

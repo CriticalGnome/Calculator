@@ -44,15 +44,15 @@ public class HistoryActivity extends AppCompatActivity {
             public void onLongItemClick(final View view, final int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(historyView.getContext());
                 builder
-                        .setMessage("Delete history item?")
+                        .setMessage(R.string.confirm_delete)
                         .setCancelable(false)
-                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
                         })
-                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 HistoryKeeper.getList().remove(position);

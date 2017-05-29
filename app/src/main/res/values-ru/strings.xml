@@ -4,4 +4,6 @@
     <string name="expression_text">Выражение</string>
     <string name="result_text">Результат</string>
     <string name="date">дата</string>
+    <string name="confirm_delete">Строка будет удалена</string>
+    <string name="cancel">Отмена</string>
 </resources>

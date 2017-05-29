@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final HistoryItem item = historyItems.get(position);
         HistoryItemHolder historyItemHolder = (HistoryItemHolder) holder;
-        historyItemHolder.dateTextView.setText(item.getDate().toString());
+        historyItemHolder.dateTextView.setText(item.getDate());
         historyItemHolder.expressionTextView.setText(item.getExpression());
         historyItemHolder.resultTextView.setText(item.getResult());
         historyItemHolder.itemView.setBackgroundColor(position%2 == 0 ? Color.WHITE : Color.LTGRAY);

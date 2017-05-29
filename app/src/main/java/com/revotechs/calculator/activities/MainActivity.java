@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initAdditionalFields();
         }
 
+        String oldExpression = getIntent().getStringExtra("expression");
+        if (oldExpression != null) expression = oldExpression;
+
         resultView.setText(String.valueOf(calculator.calc(expression)));
         currentView.setText(String.valueOf(expression));
 
@@ -149,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.current_vew:
                 Intent intent = new Intent(this, HistoryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 404);
                 break;
             default:
                 break;

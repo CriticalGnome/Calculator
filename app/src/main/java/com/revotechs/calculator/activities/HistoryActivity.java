@@ -1,7 +1,9 @@
 package com.revotechs.calculator.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +23,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
+        final RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         historyView.setLayoutManager(manager);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(HistoryKeeper.getList());
@@ -39,7 +41,24 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(historyView.getContext());
+                builder
+                        .setMessage("Delete history item?")
+                        .setCancelable(false)
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        })
+                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         }));
 

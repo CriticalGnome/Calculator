@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.tools.Calculator;
 import com.revotechs.calculator.tools.HistoryItem;
+import com.revotechs.calculator.tools.HistoryKeeper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String NULL_VALUE = "";
     private static String expression = NULL_VALUE;
-    private static ArrayList<HistoryItem> history = new ArrayList<>();
     private static boolean comma;
     private Calculator calculator = new Calculator();
 
@@ -141,14 +141,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_equal:
                 comma = false;
-                history.add(new HistoryItem(new Date(), expression, calculator.calc(expression)));
+                HistoryKeeper.addItem(new HistoryItem(new Date(), expression, calculator.calc(expression)));
                 expression = calculator.calc(expression);
                 if (expression.contains(".")) {
                     comma = true;
                 }
                 break;
             case R.id.current_vew:
-                HistoryActivity.historyItems = history;
                 Intent i = new Intent(this, HistoryActivity.class);
                 startActivity(i);
                 break;

@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.R;
+import com.revotechs.calculator.tools.HistoryItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project Calculator
@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<HistoryItem> historyItems;
+    private List<HistoryItem> historyItems;
 
-    public RecyclerViewAdapter(ArrayList<HistoryItem> historyItems) {
+    public RecyclerViewAdapter(List<HistoryItem> historyItems) {
         this.historyItems = historyItems;
     }
 

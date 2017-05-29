@@ -17,14 +17,10 @@
     <string name="reset" translatable="false">C</string>
     <string name="comma" translatable="false">,</string>
     <string name="equal" translatable="false"> = </string>
-    <string name="textview" translatable="false">0</string>
-    <string name="exit">Exit</string>
     <string name="left_brace" translatable="false">(</string>
     <string name="right_brace" translatable="false">)</string>
     <string name="back" translatable="false"><![CDATA[<<]]></string>
-    <string name="date" translatable="false">date</string>
-    <string name="expression">expression</string>
-    <string name="result">result</string>
     <string name="result_text">Result</string>
     <string name="expression_text">Expression</string>
+    <string name="date">date</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.revotechs.calculator;
+package com.revotechs.calculator.activities;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.revotechs.calculator.R;
+import com.revotechs.calculator.tools.Calculator;
+import com.revotechs.calculator.tools.HistoryItem;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Project Calculator
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String NULL_VALUE = "";
     private static String expression = NULL_VALUE;
-    private static List<HistoryItem> history = new ArrayList<>();
+    private static ArrayList<HistoryItem> history = new ArrayList<>();
     private static boolean comma;
     private Calculator calculator = new Calculator();
 
@@ -145,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.current_vew:
+                HistoryActivity.historyItems = history;
                 Intent i = new Intent(this, HistoryActivity.class);
-                i.putExtra("history", history.toArray());
                 startActivity(i);
                 break;
             default:

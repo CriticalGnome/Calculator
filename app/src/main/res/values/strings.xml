@@ -24,4 +24,7 @@
     <string name="percent">%</string>
     <string name="sqrt">√</string>
     <string name="back"><![CDATA[<<]]></string>
+    <string name="date">date</string>
+    <string name="expression">expression</string>
+    <string name="result">result</string>
 </resources>

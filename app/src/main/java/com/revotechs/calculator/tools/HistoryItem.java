@@ -1,4 +1,4 @@
-package com.revotechs.calculator;
+package com.revotechs.calculator.tools;
 
 import java.util.Date;
 
@@ -10,13 +10,13 @@ import java.util.Date;
  * @author CriticalGnome
  */
 
-class HistoryItem {
+public class HistoryItem {
 
     private Date date;
     private String expression;
     private String result;
 
-    HistoryItem(Date date, String expression, String result) {
+    public HistoryItem(Date date, String expression, String result) {
         this.date = date;
         this.expression = expression;
         this.result = result;

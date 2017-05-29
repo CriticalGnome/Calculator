@@ -1,4 +1,4 @@
-package com.revotechs.calculator;
+package com.revotechs.calculator.tools;
 
 import android.text.TextUtils;
 
@@ -31,7 +31,7 @@ public class Calculator {
         MAIN_MATH_OPERATIONS.put("-", 2);
     }
 
-    String calc(String expression) {
+    public String calc(String expression) {
         if (TextUtils.isEmpty(expression)) {
             expression = "0";
         }

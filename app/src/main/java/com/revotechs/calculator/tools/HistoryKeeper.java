@@ -11,7 +11,7 @@ import java.util.List;
  * @author CriticalGnome
  */
 
-public class HistoryKeeper {
+public class HistoryKeeper { //TODO Прибить
 
     private static List<HistoryItem> items = new ArrayList<>();
 

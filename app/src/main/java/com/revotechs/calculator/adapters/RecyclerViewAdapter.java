@@ -11,6 +11,7 @@ import com.revotechs.calculator.R;
 import com.revotechs.calculator.tools.HistoryItem;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Project Calculator
@@ -40,6 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final HistoryItem item = historyItems.get(position);
         HistoryItemHolder historyItemHolder = (HistoryItemHolder) holder;
+        historyItemHolder.idTextView.setText(String.format(item.getId().toString(), Locale.ENGLISH));
         historyItemHolder.dateTextView.setText(item.getDate());
         historyItemHolder.expressionTextView.setText(item.getExpression());
         historyItemHolder.resultTextView.setText(item.getResult());
@@ -53,15 +55,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private class HistoryItemHolder extends RecyclerView.ViewHolder {
 
+        TextView idTextView;
         TextView dateTextView;
         TextView expressionTextView;
         TextView resultTextView;
 
         HistoryItemHolder(View itemView) {
             super(itemView);
+            idTextView = (TextView) itemView.findViewById(R.id.id_text_view);
             dateTextView = (TextView) itemView.findViewById(R.id.date_text_view);
             expressionTextView = (TextView) itemView.findViewById(R.id.expression_text_view);
             resultTextView = (TextView) itemView.findViewById(R.id.result_text_view);
+
         }
     }
 }

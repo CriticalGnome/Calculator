@@ -153,8 +153,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_equal:
                 comma = false;
-                HistoryKeeper.addItem(new HistoryItem(new Date(), expression, calculator.calc(expression)));
-                expression = calculator.calc(expression);
+                String result = calculator.calc(expression);
+                if (result.equals("Wrong format")) {
+                    result = String.valueOf(R.string.wrong_format);
+                }
+                if (result.equals("Division by zero")) {
+                    result = String.valueOf(R.string.division_by_zero);
+                }
+                HistoryKeeper.addItem(new HistoryItem(new Date(), expression, result));
+                expression = result;
                 if (expression.contains(".")) {
                     comma = true;
                 }

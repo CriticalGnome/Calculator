@@ -6,4 +6,6 @@
     <string name="date">дата</string>
     <string name="confirm_delete">Строка будет удалена</string>
     <string name="cancel">Отмена</string>
+    <string name="division_by_zero">Деление на ноль</string>
+    <string name="wrong_format">Неверный формат</string>
 </resources>

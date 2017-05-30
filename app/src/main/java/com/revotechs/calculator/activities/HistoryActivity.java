@@ -3,8 +3,10 @@ package com.revotechs.calculator.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +19,8 @@ import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.tools.RecyclerItemClickListener;
 
 import java.util.List;
+
+import static android.support.v7.recyclerview.R.attr.layoutManager;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -33,6 +37,8 @@ public class HistoryActivity extends AppCompatActivity {
         final List<HistoryItem> items = historyDao.getAll(historyView.getContext());
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter(items);
         historyView.setAdapter(adapter);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
+        historyView.addItemDecoration(itemDecoration);
         historyView.addOnItemTouchListener(new RecyclerItemClickListener(historyView.getContext(), historyView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

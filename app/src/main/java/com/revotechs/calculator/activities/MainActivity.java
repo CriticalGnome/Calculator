@@ -23,7 +23,7 @@ import java.util.Date;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String NULL_VALUE = "";
+    private static final String NULL_VALUE = "0";
     private static String expression = NULL_VALUE;
     private static boolean comma;
     private Calculator calculator = new Calculator();
@@ -89,42 +89,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!expression.isEmpty()) {
                     expression = expression.substring(0, expression.length()-1);
                 }
+                if (expression.isEmpty()) {
+                    expression = NULL_VALUE;
+                }
                 break;
             case R.id.button_0:
-                expression = expression.concat("0");
+                expression = (expression.equals(NULL_VALUE) ? expression = NULL_VALUE : expression.concat("0"));
                 break;
             case R.id.button_1:
-                expression = expression.concat("1");
+                expression = (expression.equals(NULL_VALUE) ? expression = "1" : expression.concat("1"));
                 break;
             case R.id.button_2:
-                expression = expression.concat("2");
+                expression = (expression.equals(NULL_VALUE) ? expression = "2" : expression.concat("2"));
                 break;
             case R.id.button_3:
-                expression = expression.concat("3");
+                expression = (expression.equals(NULL_VALUE) ? expression = "3" : expression.concat("3"));
                 break;
             case R.id.button_4:
-                expression = expression.concat("4");
+                expression = (expression.equals(NULL_VALUE) ? expression = "4" : expression.concat("4"));
                 break;
             case R.id.button_5:
-                expression = expression.concat("5");
+                expression = (expression.equals(NULL_VALUE) ? expression = "5" : expression.concat("5"));
                 break;
             case R.id.button_6:
-                expression = expression.concat("6");
+                expression = (expression.equals(NULL_VALUE) ? expression = "6" : expression.concat("6"));
                 break;
             case R.id.button_7:
-                expression = expression.concat("7");
+                expression = (expression.equals(NULL_VALUE) ? expression = "7" : expression.concat("7"));
                 break;
             case R.id.button_8:
-                expression = expression.concat("8");
+                expression = (expression.equals(NULL_VALUE) ? expression = "8" : expression.concat("8"));
                 break;
             case R.id.button_9:
-                expression = expression.concat("9");
+                expression = (expression.equals(NULL_VALUE) ? expression = "9" : expression.concat("9"));
                 break;
             case R.id.button_left_brace:
-                expression = expression.concat("(");
+                expression = (expression.equals(NULL_VALUE) ? expression = "(" : expression.concat("("));
                 break;
             case R.id.button_right_brace:
-                expression = expression.concat(")");
+                expression = (expression.equals(NULL_VALUE) ? expression = ")" : expression.concat(")"));
                 break;
             case R.id.button_comma:
                 if (!comma) {

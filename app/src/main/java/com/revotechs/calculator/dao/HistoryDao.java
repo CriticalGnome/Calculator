@@ -83,7 +83,7 @@ public class HistoryDao {
         dbHelper = new DBHelper(context);
         db = dbHelper.getReadableDatabase();
         List<HistoryItem> items = new ArrayList<>();
-        Cursor cursor = db.query("history", null, null, null, null, null, null);
+        Cursor cursor = db.query("history", null, null, null, null, null, "id DESC");
         if (cursor.moveToFirst()) {
             int idColIndex = cursor.getColumnIndex("id");
             int dateColIndex = cursor.getColumnIndex("date");

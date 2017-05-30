@@ -13,7 +13,6 @@ import com.revotechs.calculator.dao.HistoryDao;
 import com.revotechs.calculator.tools.Calculator;
 import com.revotechs.calculator.tools.DBHelper;
 import com.revotechs.calculator.tools.HistoryItem;
-import com.revotechs.calculator.tools.HistoryKeeper;
 
 import java.util.Date;
 

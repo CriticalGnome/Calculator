@@ -13,7 +13,10 @@ import android.widget.TextView;
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.adapters.RecyclerViewAdapter;
 import com.revotechs.calculator.dao.HistoryDao;
+import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.tools.RecyclerItemClickListener;
+
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -27,7 +30,8 @@ public class HistoryActivity extends AppCompatActivity {
         final RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         historyView.setLayoutManager(manager);
-        final RecyclerViewAdapter adapter = new RecyclerViewAdapter(historyDao.getAll(historyView.getContext()));
+        final List<HistoryItem> items = historyDao.getAll(historyView.getContext());
+        final RecyclerViewAdapter adapter = new RecyclerViewAdapter(items);
         historyView.setAdapter(adapter);
         historyView.addOnItemTouchListener(new RecyclerItemClickListener(historyView.getContext(), historyView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -55,9 +59,9 @@ public class HistoryActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //HistoryKeeper.getList().remove(position);
-
-                                adapter.notifyDataSetChanged();
+                                HistoryItem item = items.get(position);
+                                historyDao.delete(item.getId(), historyView.getContext());
+                                adapter.notifyItemRemoved(position);
                             }
                         });
                 AlertDialog alert = builder.create();

@@ -23,6 +23,7 @@ public class HistoryDao {
 
     private static final String TABLE_HISTORY = "history";
     private static final String FIELD_ID = "id";
+    private static final String FIELD_COMMENT = "comment";
     private static final String FIELD_DATE = "date";
     private static final String FIELD_EXPRESSION = "expression";
     private static final String FIELD_RESULT = "result";
@@ -57,6 +58,7 @@ public class HistoryDao {
         cv.put(FIELD_DATE, item.getDate());
         cv.put(FIELD_EXPRESSION, item.getExpression());
         cv.put(FIELD_RESULT, item.getResult());
+        cv.put(FIELD_COMMENT, item.getComment());
         Long id = db.insert(TABLE_HISTORY, null, cv);
         item.setId(id);
         Log.d(HISTORY_DAO, item.toString());
@@ -74,11 +76,13 @@ public class HistoryDao {
             int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
             int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
             int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
+            int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
             do {
                 item.setId(cursor.getLong(idColIndex));
                 item.setDate(cursor.getString(dateColIndex));
                 item.setExpression(cursor.getString(expressionColIndex));
                 item.setResult(cursor.getString(resultColIndex));
+                item.setComment(cursor.getString(commentColIndex));
             } while (cursor.moveToNext());
         } else {
             Log.d(HISTORY_DAO, NO_DATA);
@@ -99,12 +103,14 @@ public class HistoryDao {
             int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
             int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
             int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
+            int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
             do {
                 HistoryItem item = new HistoryItem();
                 item.setId(cursor.getLong(idColIndex));
                 item.setDate(cursor.getString(dateColIndex));
                 item.setExpression(cursor.getString(expressionColIndex));
                 item.setResult(cursor.getString(resultColIndex));
+                item.setComment(cursor.getString(commentColIndex));
                 items.add(item);
             } while (cursor.moveToNext());
         } else {
@@ -123,6 +129,7 @@ public class HistoryDao {
         cv.put(FIELD_DATE, item.getDate());
         cv.put(FIELD_EXPRESSION, item.getExpression());
         cv.put(FIELD_RESULT, item.getResult());
+        cv.put(FIELD_COMMENT, item.getComment());
         String where = FIELD_ID + EQUAL_SIGN + item.getId();
         db.update(TABLE_HISTORY, cv, where, null);
         Log.d(HISTORY_DAO, FIELD_ID + EQUAL_SIGN +  item.getId() + UPDATED);

@@ -19,11 +19,19 @@ public class HistoryItem implements Serializable {
     private String date;
     private String expression;
     private String result;
+    private String comment;
 
     public HistoryItem(Date date, String expression, String result) {
         this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
         this.expression = expression;
         this.result = result;
+    }
+
+    public HistoryItem(Date date, String expression, String result, String comment) {
+        this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
+        this.expression = expression;
+        this.result = result;
+        this.comment = comment;
     }
 
     public HistoryItem(Long id, Date date, String expression, String result) {
@@ -83,4 +91,10 @@ public class HistoryItem implements Serializable {
         this.result = result;
     }
 
+    public String getComment() {
+        return comment;
+    }
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_CODE_FROM_HISTORY) {
+
+        if (data != null) {
             expression = data.getStringExtra("expression");
         }
         resultView.setText(String.valueOf(calculator.calc(expression)));

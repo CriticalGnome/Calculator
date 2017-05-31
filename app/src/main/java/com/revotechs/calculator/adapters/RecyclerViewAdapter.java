@@ -44,6 +44,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         historyItemHolder.dateTextView.setText(item.getDate());
         historyItemHolder.expressionTextView.setText(item.getExpression());
         historyItemHolder.resultTextView.setText(item.getResult());
+        if (item.getComment() != null) {
+            historyItemHolder.commentView.setText(item.getComment());
+            historyItemHolder.commentView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -57,6 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView dateTextView;
         TextView expressionTextView;
         TextView resultTextView;
+        TextView commentView;
 
         HistoryItemHolder(View itemView) {
             super(itemView);
@@ -64,6 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             dateTextView = (TextView) itemView.findViewById(R.id.date_text_view);
             expressionTextView = (TextView) itemView.findViewById(R.id.expression_text_view);
             resultTextView = (TextView) itemView.findViewById(R.id.result_text_view);
+            commentView = (TextView) itemView.findViewById(R.id.comment_text_view);
 
         }
     }

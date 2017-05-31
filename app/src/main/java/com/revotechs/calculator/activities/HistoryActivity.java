@@ -3,7 +3,6 @@ package com.revotechs.calculator.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,8 +18,6 @@ import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.tools.RecyclerItemClickListener;
 
 import java.util.List;
-
-import static android.support.v7.recyclerview.R.attr.layoutManager;
 
 public class HistoryActivity extends AppCompatActivity {
 

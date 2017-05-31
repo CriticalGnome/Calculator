@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.dao.HistoryDao;
 import com.revotechs.calculator.tools.Calculator;
-import com.revotechs.calculator.tools.DBHelper;
 import com.revotechs.calculator.tools.HistoryItem;
 
 import java.util.Date;
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static boolean comma;
     private Calculator calculator = new Calculator();
     private HistoryDao historyDao = HistoryDao.getInstance();
-    DBHelper dbHelper = new DBHelper(this);
 
     TextView resultView;
     TextView currentView;
@@ -163,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (result.equals("Division by zero")) {
                     result = String.valueOf(R.string.division_by_zero);
                 }
-                Long id = historyDao.create(new HistoryItem(new Date(), expression, result), v.getContext());
+                historyDao.create(new HistoryItem(new Date(), expression, result), v.getContext());
                 expression = result;
                 if (expression.contains(".")) {
                     comma = true;

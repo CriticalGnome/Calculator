@@ -44,7 +44,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         historyItemHolder.dateTextView.setText(item.getDate());
         historyItemHolder.expressionTextView.setText(item.getExpression());
         historyItemHolder.resultTextView.setText(item.getResult());
-        //historyItemHolder.itemView.setBackgroundColor(position%2 == 0 ? Color.WHITE : Color.LTGRAY);
     }
 
     @Override

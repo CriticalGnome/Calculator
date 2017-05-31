@@ -2,12 +2,15 @@ package com.revotechs.calculator.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,14 +22,22 @@ import com.revotechs.calculator.tools.RecyclerItemClickListener;
 
 import java.util.List;
 
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity implements View.OnTouchListener {
 
+    public static final String EXTRA_EXPRESSION_NAME = "expression";
     private HistoryDao historyDao = HistoryDao.getInstance();
+    private int screenWidth;
+    private float xCoord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
 
         final RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -36,15 +47,15 @@ public class HistoryActivity extends AppCompatActivity {
         historyView.setAdapter(adapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
         historyView.addItemDecoration(itemDecoration);
+        historyView.setOnTouchListener(this);
         historyView.addOnItemTouchListener(new RecyclerItemClickListener(historyView.getContext(), historyView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 String expression = ((TextView) view.findViewById(R.id.expression_text_view)).getText().toString();
                 Intent intent = new Intent();
-                intent.putExtra("expression", expression);
+                intent.putExtra(EXTRA_EXPRESSION_NAME, expression);
                 setResult(RESULT_OK, intent);
                 finish();
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
             }
 
             @Override
@@ -72,5 +83,22 @@ public class HistoryActivity extends AppCompatActivity {
             }
         }));
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                xCoord = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+
+                if (event.getX() - xCoord > screenWidth / 2) {
+                    Intent i = new Intent(v.getContext(), MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+        }
+        return false;
     }
 }

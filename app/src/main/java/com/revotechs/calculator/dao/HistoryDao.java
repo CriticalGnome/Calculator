@@ -14,14 +14,24 @@ import java.util.List;
 
 /**
  * Project Calculator
- * <p>
- * Created on 30.05.2017
  *
+ * Created on 30.05.2017
  * @author CriticalGnome
  */
 
 public class HistoryDao {
 
+    private static final String TABLE_HISTORY = "history";
+    private static final String FIELD_ID = "id";
+    private static final String FIELD_DATE = "date";
+    private static final String FIELD_EXPRESSION = "expression";
+    private static final String FIELD_RESULT = "result";
+    private static final String ORDERING_DESC = "DESC";
+    private static final String HISTORY_DAO = "historyDAO";
+    private static final String NO_DATA = "No data";
+    private static final String UPDATED = " updated";
+    private static final String DELETED = " deleted";
+    private static final String EQUAL_SIGN = " = ";
     private static volatile HistoryDao instance;
     private DBHelper dbHelper;
     private ContentValues cv;
@@ -44,12 +54,12 @@ public class HistoryDao {
         dbHelper = new DBHelper(context);
         db = dbHelper.getWritableDatabase();
         cv = new ContentValues();
-        cv.put("date", item.getDate());
-        cv.put("expression", item.getExpression());
-        cv.put("result", item.getResult());
-        Long id = db.insert("history", null, cv);
+        cv.put(FIELD_DATE, item.getDate());
+        cv.put(FIELD_EXPRESSION, item.getExpression());
+        cv.put(FIELD_RESULT, item.getResult());
+        Long id = db.insert(TABLE_HISTORY, null, cv);
         item.setId(id);
-        Log.d("HistoryDAO", item.toString());
+        Log.d(HISTORY_DAO, item.toString());
         dbHelper.close();
         return id;
     }
@@ -58,12 +68,12 @@ public class HistoryDao {
         dbHelper = new DBHelper(context);
         db = dbHelper.getReadableDatabase();
         HistoryItem item = new HistoryItem();
-        Cursor cursor = db.query("history", null, "id = ?", new String[] {id.toString()}, null, null, null);
+        Cursor cursor = db.query(TABLE_HISTORY, null, FIELD_ID + " = ?", new String[] {id.toString()}, null, null, null);
         if (cursor.moveToFirst()) {
-            int idColIndex = cursor.getColumnIndex("id");
-            int dateColIndex = cursor.getColumnIndex("date");
-            int expressionColIndex = cursor.getColumnIndex("expression");
-            int resultColIndex = cursor.getColumnIndex("result");
+            int idColIndex = cursor.getColumnIndex(FIELD_ID);
+            int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
+            int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
+            int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
             do {
                 item.setId(cursor.getLong(idColIndex));
                 item.setDate(cursor.getString(dateColIndex));
@@ -71,9 +81,9 @@ public class HistoryDao {
                 item.setResult(cursor.getString(resultColIndex));
             } while (cursor.moveToNext());
         } else {
-            Log.d("historyDAO", "No data");
+            Log.d(HISTORY_DAO, NO_DATA);
         }
-        Log.d("HistoryDAO", item.toString());
+        Log.d(HISTORY_DAO, item.toString());
         cursor.close();
         dbHelper.close();
         return item;
@@ -83,12 +93,12 @@ public class HistoryDao {
         dbHelper = new DBHelper(context);
         db = dbHelper.getReadableDatabase();
         List<HistoryItem> items = new ArrayList<>();
-        Cursor cursor = db.query("history", null, null, null, null, null, "id DESC");
+        Cursor cursor = db.query(TABLE_HISTORY, null, null, null, null, null, FIELD_ID + " " + ORDERING_DESC);
         if (cursor.moveToFirst()) {
-            int idColIndex = cursor.getColumnIndex("id");
-            int dateColIndex = cursor.getColumnIndex("date");
-            int expressionColIndex = cursor.getColumnIndex("expression");
-            int resultColIndex = cursor.getColumnIndex("result");
+            int idColIndex = cursor.getColumnIndex(FIELD_ID);
+            int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
+            int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
+            int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
             do {
                 HistoryItem item = new HistoryItem();
                 item.setId(cursor.getLong(idColIndex));
@@ -98,9 +108,9 @@ public class HistoryDao {
                 items.add(item);
             } while (cursor.moveToNext());
         } else {
-            Log.d("historyDAO", "No data");
+            Log.d(HISTORY_DAO, NO_DATA);
         }
-        Log.d("HistoryDAO", items.toString());
+        Log.d(HISTORY_DAO, items.toString());
         cursor.close();
         dbHelper.close();
         return items;
@@ -110,18 +120,19 @@ public class HistoryDao {
         dbHelper = new DBHelper(context);
         db = dbHelper.getWritableDatabase();
         cv = new ContentValues();
-        cv.put("date", item.getDate());
-        cv.put("expression", item.getExpression());
-        cv.put("result", item.getResult());
-        String where = "id = " + item.getId();
-        db.update("history", cv, where, null);
+        cv.put(FIELD_DATE, item.getDate());
+        cv.put(FIELD_EXPRESSION, item.getExpression());
+        cv.put(FIELD_RESULT, item.getResult());
+        String where = FIELD_ID + EQUAL_SIGN + item.getId();
+        db.update(TABLE_HISTORY, cv, where, null);
+        Log.d(HISTORY_DAO, FIELD_ID + EQUAL_SIGN +  item.getId() + UPDATED);
     }
 
     public void delete(Long id, Context context) {
         dbHelper = new DBHelper(context);
         db = dbHelper.getWritableDatabase();
-        db.delete("history", "id = " + id, null);
-        Log.d("HistoryDAO", "item id=" + id + " deleted");
+        db.delete(TABLE_HISTORY, FIELD_ID + EQUAL_SIGN + id, null);
+        Log.d(HISTORY_DAO, FIELD_ID + EQUAL_SIGN +  id + DELETED);
     }
 
 }

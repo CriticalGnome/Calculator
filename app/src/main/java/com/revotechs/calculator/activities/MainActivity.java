@@ -24,6 +24,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String NULL_VALUE = "0";
+    public static final int RESULT_CODE_FROM_HISTORY = 404;
     private static String expression = NULL_VALUE;
     private static boolean comma;
     private Calculator calculator = new Calculator();
@@ -70,10 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null) {
-            return;
+        if (resultCode == RESULT_CODE_FROM_HISTORY) {
+            expression = data.getStringExtra("expression");
         }
-        expression = data.getStringExtra("expression");
         resultView.setText(String.valueOf(calculator.calc(expression)));
         currentView.setText(String.valueOf(expression));
     }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_0:
-                expression = (expression.equals(NULL_VALUE) ? expression = NULL_VALUE : expression.concat("0"));
+                expression = (expression.equals(NULL_VALUE) ? expression = "0" : expression.concat("0"));
                 break;
             case R.id.button_1:
                 expression = (expression.equals(NULL_VALUE) ? expression = "1" : expression.concat("1"));
@@ -169,8 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.current_vew:
                 Intent intent = new Intent(this, HistoryActivity.class);
-                startActivityForResult(intent, 404);
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                startActivityForResult(intent, RESULT_CODE_FROM_HISTORY);
                 break;
             default:
                 break;
@@ -183,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initFields() {
+
         resultView = (TextView) findViewById(R.id.result_view);
         currentView = (TextView) findViewById(R.id.current_vew);
         button0 = (Button) findViewById(R.id.button_0);
@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonBack = (Button) findViewById(R.id.button_back);
 
         currentView.setOnClickListener(this);
+
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);

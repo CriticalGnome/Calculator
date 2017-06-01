@@ -37,4 +37,5 @@
     </string-array>
     <string name="history_item_alert_comment">Comment</string>
     <string name="history_item_alert_delete">Delete row</string>
+    <string name="comment_title">Enter a comment</string>
 </resources>

@@ -16,4 +16,5 @@
         <item>Комментарий</item>
         <item>Удалить строку</item>
     </string-array>
+    <string name="comment_title">Введите комментарий</string>
 </resources>

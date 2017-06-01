@@ -10,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.revotechs.calculator.R;
@@ -67,19 +69,51 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                 Resources res = getResources();
                 listMenuItems = res.getStringArray(R.array.history_item_alert_menu);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle(R.string.history_item_alert_title);
-                builder.setItems(listMenuItems, new DialogInterface.OnClickListener() {
+                AlertDialog.Builder menuBuilder = new AlertDialog.Builder(view.getContext());
+                menuBuilder.setTitle(R.string.history_item_alert_title);
+                menuBuilder.setItems(listMenuItems, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), listMenuItems[which], Toast.LENGTH_SHORT).show();
                         switch (which) {
                             case 0:
                                 //TODO Добавление комментаря к записи
+                                AlertDialog.Builder commentBuilder = new AlertDialog.Builder(historyView.getContext());
+                                final EditText input = new EditText(historyView.getContext());
+                                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                                commentBuilder
+                                        .setCancelable(false)
+                                        .setTitle(R.string.comment_title)
+                                        .setView(input)
+                                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        })
+                                        .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                HistoryItem item = items.get(position);
+                                                String comment = input.getText().toString();
+                                                if (comment.isEmpty()) {
+                                                    comment = null;
+                                                }
+                                                item.setComment(comment);
+                                                historyDao.update(item, historyView.getContext());
+                                                adapter.notifyItemChanged(position);
+                                            }
+                                        });
+                                AlertDialog alertComment = commentBuilder.create();
+                                alertComment.show();
+                                String comment = items.get(position).getComment();
+                                if (comment != null) {
+                                    input.setText(comment);
+                                    input.setSelection(0, comment.length());
+                                }
                                 break;
                             case 1:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(historyView.getContext());
-                                builder
+                                AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(historyView.getContext());
+                                deleteBuilder
                                         .setMessage(R.string.confirm_delete)
                                         .setCancelable(false)
                                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -97,13 +131,13 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                                                 adapter.notifyItemRemoved(position);
                                             }
                                         });
-                                AlertDialog alert = builder.create();
-                                alert.show();
+                                AlertDialog alertDelete = deleteBuilder.create();
+                                alertDelete.show();
                                 break;
                         }
                     }
                 });
-                AlertDialog alert = builder.create();
+                AlertDialog alert = menuBuilder.create();
                 alert.show();
 
 

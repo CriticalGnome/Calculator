@@ -15,7 +15,6 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.adapters.RecyclerViewAdapter;
@@ -76,7 +75,6 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                //TODO Добавление комментаря к записи
                                 AlertDialog.Builder commentBuilder = new AlertDialog.Builder(historyView.getContext());
                                 final EditText input = new EditText(historyView.getContext());
                                 input.setInputType(InputType.TYPE_CLASS_TEXT);

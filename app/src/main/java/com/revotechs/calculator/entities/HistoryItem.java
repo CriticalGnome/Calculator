@@ -1,4 +1,4 @@
-package com.revotechs.calculator.tools;
+package com.revotechs.calculator.entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -29,30 +29,6 @@ public class HistoryItem implements Serializable {
         this.locked = locked;
     }
 
-    public HistoryItem(Date date, String expression, String result, String comment, boolean locked) {
-        this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
-        this.expression = expression;
-        this.result = result;
-        this.comment = comment;
-        this.locked = locked;
-    }
-
-    public HistoryItem(Long id, Date date, String expression, String result, boolean locked) {
-        this.id = id;
-        this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
-        this.expression = expression;
-        this.result = result;
-        this.locked = locked;
-    }
-
-    public HistoryItem(Long id, String date, String expression, String result, boolean locked) {
-        this.id = id;
-        this.date = date;
-        this.expression = expression;
-        this.result = result;
-        this.locked = locked;
-    }
-
     public HistoryItem() {}
 
     @Override
@@ -76,9 +52,6 @@ public class HistoryItem implements Serializable {
 
     public String getDate() {
         return date;
-    }
-    public void setDate(Date date) {
-        this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
     }
     public void setDate(String date) {
         this.date = date;

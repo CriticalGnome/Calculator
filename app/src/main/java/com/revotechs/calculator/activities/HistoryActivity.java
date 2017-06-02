@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.adapters.RecyclerViewAdapter;
 import com.revotechs.calculator.dao.HistoryDao;
-import com.revotechs.calculator.tools.HistoryItem;
+import com.revotechs.calculator.entities.HistoryItem;
 import com.revotechs.calculator.tools.RecyclerItemClickListener;
 
 import java.util.List;
@@ -33,13 +33,15 @@ import static android.R.color.white;
 
 public class HistoryActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    public static final String EXTRA_EXPRESSION_NAME = "expression";
-    RecyclerView historyView;
-    TextView searchView;
-    LinearLayoutManager manager;
-    RecyclerViewAdapter adapter;
-    RecyclerView.ItemDecoration itemDecoration;
-    List<HistoryItem> items;
+    private static final String EXTRA_EXPRESSION_NAME = "expression";
+    private static final int MENU_COMMENT = 0;
+    private static final int MENU_DELETE = 1;
+    private static final int MENU_LOCK = 2;
+    private RecyclerView historyView;
+    private TextView searchView;
+    private RecyclerViewAdapter adapter;
+    private RecyclerView.ItemDecoration itemDecoration;
+    private List<HistoryItem> items;
     private String[] listMenuItems;
     private HistoryDao historyDao = HistoryDao.getInstance();
     private int screenWidth;
@@ -64,7 +66,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
 
         historyView = (RecyclerView) findViewById(R.id.history_view);
 
-        manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         historyView.setLayoutManager(manager);
 
         if (searchString.isEmpty()) {
@@ -101,7 +103,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
-                            case 0:
+                            case MENU_COMMENT:
                                 AlertDialog.Builder commentBuilder = new AlertDialog.Builder(historyView.getContext());
                                 final EditText input = new EditText(historyView.getContext());
                                 input.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -136,7 +138,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                                     input.setSelection(0, comment.length());
                                 }
                                 break;
-                            case 1:
+                            case MENU_DELETE:
                                 AlertDialog.Builder deleteBuilder = new AlertDialog.Builder(historyView.getContext());
                                 deleteBuilder
                                         .setMessage(R.string.confirm_delete)
@@ -159,7 +161,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                                 AlertDialog alertDelete = deleteBuilder.create();
                                 alertDelete.show();
                                 break;
-                            case 2:
+                            case MENU_LOCK:
                                 HistoryItem item = items.get(position);
                                 if (item.isLocked()) {
                                     item.setLocked(false);

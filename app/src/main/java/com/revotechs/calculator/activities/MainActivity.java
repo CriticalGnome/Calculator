@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.dao.HistoryDao;
 import com.revotechs.calculator.tools.Calculator;
-import com.revotechs.calculator.tools.HistoryItem;
+import com.revotechs.calculator.entities.HistoryItem;
 
 import java.util.Date;
 

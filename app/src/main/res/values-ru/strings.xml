@@ -15,8 +15,14 @@
     <string-array name="history_item_alert_menu">
         <item>Комментарий</item>
         <item>Удалить строку</item>
+        <item>Защитить от удаления</item>
     </string-array>
     <string name="comment_title">Введите комментарий</string>
     <string name="search">Поиск</string>
     <string name="search_title">"Поиск: "</string>
+    <string name="select_all">Выделить всё</string>
+    <string name="select_none">Очистить выделение</string>
+    <string name="delete">Удалить</string>
+    <string name="clear">Очистить</string>
+    <string name="clear_history_message">Очистить историю?</string>
 </resources>

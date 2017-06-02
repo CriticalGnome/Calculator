@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (result.equals("Division by zero")) {
                     result = String.valueOf(R.string.division_by_zero);
                 }
-                historyDao.create(new HistoryItem(new Date(), expression, result), v.getContext());
+                historyDao.create(new HistoryItem(new Date(), expression, result, false), v.getContext());
                 expression = result;
                 if (expression.contains(".")) {
                     comma = true;

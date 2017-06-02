@@ -27,6 +27,7 @@ public class HistoryDao {
     private static final String FIELD_DATE = "date";
     private static final String FIELD_EXPRESSION = "expression";
     private static final String FIELD_RESULT = "result";
+    private static final String FIELD_LOCKED = "locked";
     private static final String ORDERING_DESC = "DESC";
     private static final String HISTORY_DAO = "historyDAO";
     private static final String NO_DATA = "No data";
@@ -59,6 +60,11 @@ public class HistoryDao {
         cv.put(FIELD_EXPRESSION, item.getExpression());
         cv.put(FIELD_RESULT, item.getResult());
         cv.put(FIELD_COMMENT, item.getComment());
+        if (item.isLocked()) {
+            cv.put(FIELD_LOCKED, 1);
+        } else {
+            cv.put(FIELD_LOCKED, 0);
+        }
         Long id = db.insert(TABLE_HISTORY, null, cv);
         item.setId(id);
         Log.d(HISTORY_DAO, item.toString());
@@ -77,12 +83,18 @@ public class HistoryDao {
             int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
             int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
             int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
+            int lockedColIndex = cursor.getColumnIndex(FIELD_LOCKED);
             do {
                 item.setId(cursor.getLong(idColIndex));
                 item.setDate(cursor.getString(dateColIndex));
                 item.setExpression(cursor.getString(expressionColIndex));
                 item.setResult(cursor.getString(resultColIndex));
                 item.setComment(cursor.getString(commentColIndex));
+                if (cursor.getInt(lockedColIndex) == 1) {
+                    item.setLocked(true);
+                } else {
+                    item.setLocked(false);
+                }
             } while (cursor.moveToNext());
         } else {
             Log.d(HISTORY_DAO, NO_DATA);
@@ -104,6 +116,7 @@ public class HistoryDao {
             int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
             int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
             int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
+            int lockedColIndex = cursor.getColumnIndex(FIELD_LOCKED);
             do {
                 HistoryItem item = new HistoryItem();
                 item.setId(cursor.getLong(idColIndex));
@@ -111,6 +124,11 @@ public class HistoryDao {
                 item.setExpression(cursor.getString(expressionColIndex));
                 item.setResult(cursor.getString(resultColIndex));
                 item.setComment(cursor.getString(commentColIndex));
+                if (cursor.getInt(lockedColIndex) == 1) {
+                    item.setLocked(true);
+                } else {
+                    item.setLocked(false);
+                }
                 items.add(item);
             } while (cursor.moveToNext());
         } else {
@@ -130,6 +148,11 @@ public class HistoryDao {
         cv.put(FIELD_EXPRESSION, item.getExpression());
         cv.put(FIELD_RESULT, item.getResult());
         cv.put(FIELD_COMMENT, item.getComment());
+        if (item.isLocked()) {
+            cv.put(FIELD_LOCKED, 1);
+        } else {
+            cv.put(FIELD_LOCKED, 0);
+        }
         String where = FIELD_ID + EQUAL_SIGN + item.getId();
         db.update(TABLE_HISTORY, cv, where, null);
         Log.d(HISTORY_DAO, FIELD_ID + EQUAL_SIGN +  item.getId() + UPDATED);
@@ -164,6 +187,7 @@ public class HistoryDao {
             int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
             int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
             int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
+            int lockedColIndex = cursor.getColumnIndex(FIELD_LOCKED);
             do {
                 HistoryItem item = new HistoryItem();
                 item.setId(cursor.getLong(idColIndex));
@@ -171,6 +195,11 @@ public class HistoryDao {
                 item.setExpression(cursor.getString(expressionColIndex));
                 item.setResult(cursor.getString(resultColIndex));
                 item.setComment(cursor.getString(commentColIndex));
+                if (cursor.getInt(lockedColIndex) == 1) {
+                    item.setLocked(true);
+                } else {
+                    item.setLocked(false);
+                }
                 items.add(item);
             } while (cursor.moveToNext());
             Log.d(HISTORY_DAO, items.toString());
@@ -180,5 +209,11 @@ public class HistoryDao {
         cursor.close();
         dbHelper.close();
         return items;
+    }
+
+    public void crearHistory(Context context) {
+        dbHelper = new DBHelper(context);
+        db = dbHelper.getWritableDatabase();
+        db.delete(TABLE_HISTORY, FIELD_LOCKED + " = 0", null);
     }
 }

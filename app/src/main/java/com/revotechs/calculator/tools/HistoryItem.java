@@ -20,32 +20,37 @@ public class HistoryItem implements Serializable {
     private String expression;
     private String result;
     private String comment;
+    private boolean locked;
 
-    public HistoryItem(Date date, String expression, String result) {
+    public HistoryItem(Date date, String expression, String result, boolean locked) {
         this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
         this.expression = expression;
         this.result = result;
+        this.locked = locked;
     }
 
-    public HistoryItem(Date date, String expression, String result, String comment) {
+    public HistoryItem(Date date, String expression, String result, String comment, boolean locked) {
         this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
         this.expression = expression;
         this.result = result;
         this.comment = comment;
+        this.locked = locked;
     }
 
-    public HistoryItem(Long id, Date date, String expression, String result) {
+    public HistoryItem(Long id, Date date, String expression, String result, boolean locked) {
         this.id = id;
         this.date = new SimpleDateFormat("EEEE, dd MMMM yyyy, H:mm:ss", Locale.getDefault()).format(date);
         this.expression = expression;
         this.result = result;
+        this.locked = locked;
     }
 
-    public HistoryItem(Long id, String date, String expression, String result) {
+    public HistoryItem(Long id, String date, String expression, String result, boolean locked) {
         this.id = id;
         this.date = date;
         this.expression = expression;
         this.result = result;
+        this.locked = locked;
     }
 
     public HistoryItem() {}
@@ -57,6 +62,8 @@ public class HistoryItem implements Serializable {
                 ", date='" + date + '\'' +
                 ", expression='" + expression + '\'' +
                 ", result='" + result + '\'' +
+                ", comment='" + comment + '\'' +
+                ", locked=" + locked +
                 '}';
     }
 
@@ -96,5 +103,12 @@ public class HistoryItem implements Serializable {
     }
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }

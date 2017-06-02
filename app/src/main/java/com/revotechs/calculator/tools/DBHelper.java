@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("Calculator", "--- onCreate database ---");
-        db.execSQL("create table history (id integer primary key autoincrement, date text, expression text, result text, comment text);");
+        db.execSQL("create table history (id integer primary key autoincrement, date text, expression text, result text, comment text, locked integer);");
     }
 
     @Override

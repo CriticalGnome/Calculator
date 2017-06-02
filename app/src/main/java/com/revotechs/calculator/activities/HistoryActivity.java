@@ -6,17 +6,21 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.text.Selection;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +31,8 @@ import com.revotechs.calculator.tools.HistoryItem;
 import com.revotechs.calculator.tools.RecyclerItemClickListener;
 
 import java.util.List;
+
+import static android.R.color.white;
 
 public class HistoryActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -156,6 +162,16 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                                 AlertDialog alertDelete = deleteBuilder.create();
                                 alertDelete.show();
                                 break;
+                            case 2:
+                                HistoryItem item = items.get(position);
+                                if (item.isLocked()) {
+                                    item.setLocked(false);
+                                } else {
+                                    item.setLocked(true);
+                                }
+                                historyDao.update(item, historyView.getContext());
+                                adapter.notifyItemChanged(position);
+                                break;
                         }
                     }
                 });
@@ -209,6 +225,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                         searchView = (TextView) findViewById(R.id.search_view);
                         searchView.setText(String.format("%s%s", getString(R.string.search_title), searchString));
                         searchView.setVisibility(View.VISIBLE);
+                        if (items.isEmpty()) {
+                            searchView.setBackgroundColor(ContextCompat.getColor(historyView.getContext(), R.color.searchStringEmpty));
+                            searchView.setTextColor(ContextCompat.getColor(historyView.getContext(), white));
+                        }
                         searchView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -226,5 +246,33 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                 });
         AlertDialog alertSearch = searchBuilder.create();
         alertSearch.show();
+    }
+
+    public void onClickClear(MenuItem item) {
+        final Context context = HistoryActivity.this;
+        AlertDialog.Builder clearBuilder = new AlertDialog.Builder(context);
+        clearBuilder
+                .setMessage(R.string.clear_history_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        historyDao.crearHistory(context);
+                        List<HistoryItem> items = historyDao.getAll(context);
+                        adapter = new RecyclerViewAdapter(items);
+                        historyView.setAdapter(adapter);
+                        itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
+                        historyView.addItemDecoration(itemDecoration);
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertClear = clearBuilder.create();
+        alertClear.show();
     }
 }

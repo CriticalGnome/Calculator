@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.revotechs.calculator.R;
@@ -48,6 +50,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             historyItemHolder.commentView.setText(item.getComment());
             historyItemHolder.commentView.setVisibility(View.VISIBLE);
         }
+        if (item.isLocked()) {
+            historyItemHolder.lockImage.setVisibility(View.VISIBLE);
+        } else {
+            historyItemHolder.lockImage.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -62,6 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView expressionTextView;
         TextView resultTextView;
         TextView commentView;
+        ImageView lockImage;
 
         HistoryItemHolder(View itemView) {
             super(itemView);
@@ -70,6 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             expressionTextView = (TextView) itemView.findViewById(R.id.expression_text_view);
             resultTextView = (TextView) itemView.findViewById(R.id.result_text_view);
             commentView = (TextView) itemView.findViewById(R.id.comment_text_view);
+            lockImage = (ImageView) itemView.findViewById(R.id.lock_image);
 
         }
     }

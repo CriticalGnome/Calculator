@@ -34,10 +34,16 @@
     <string-array name="history_item_alert_menu">
         <item>Comment</item>
         <item>Delete row</item>
+        <item>Protect from cleaning</item>
     </string-array>
     <string name="history_item_alert_comment">Comment</string>
     <string name="history_item_alert_delete">Delete row</string>
     <string name="comment_title">Enter a comment</string>
     <string name="search">Search</string>
     <string name="search_title">Search:</string>
+    <string name="select_all">select all</string>
+    <string name="select_none">select none</string>
+    <string name="delete">delete</string>
+    <string name="clear">Clear history</string>
+    <string name="clear_history_message">Clear history?</string>
 </resources>

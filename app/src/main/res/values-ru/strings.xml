@@ -17,4 +17,6 @@
         <item>Удалить строку</item>
     </string-array>
     <string name="comment_title">Введите комментарий</string>
+    <string name="search">Поиск</string>
+    <string name="search_title">"Поиск: "</string>
 </resources>

@@ -142,4 +142,43 @@ public class HistoryDao {
         Log.d(HISTORY_DAO, FIELD_ID + EQUAL_SIGN +  id + DELETED);
     }
 
+    public List<HistoryItem> search(String search, Context context) {
+        dbHelper = new DBHelper(context);
+        db = dbHelper.getReadableDatabase();
+        List<HistoryItem> items = new ArrayList<>();
+        Cursor cursor = db.query(
+                TABLE_HISTORY,
+                null,
+                FIELD_DATE + " LIKE '%" + search + "%' or " +
+                        FIELD_EXPRESSION + " LIKE '%" + search + "%' or " +
+                        FIELD_RESULT + " LIKE '%" + search + "%' or " +
+                        FIELD_COMMENT + " LIKE '%" + search + "%'",
+                null,
+                null,
+                null,
+                FIELD_ID + " " + ORDERING_DESC
+        );
+        if (cursor.moveToFirst()) {
+            int idColIndex = cursor.getColumnIndex(FIELD_ID);
+            int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
+            int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
+            int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
+            int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
+            do {
+                HistoryItem item = new HistoryItem();
+                item.setId(cursor.getLong(idColIndex));
+                item.setDate(cursor.getString(dateColIndex));
+                item.setExpression(cursor.getString(expressionColIndex));
+                item.setResult(cursor.getString(resultColIndex));
+                item.setComment(cursor.getString(commentColIndex));
+                items.add(item);
+            } while (cursor.moveToNext());
+            Log.d(HISTORY_DAO, items.toString());
+        } else {
+            Log.d(HISTORY_DAO, NO_DATA);
+        }
+        cursor.close();
+        dbHelper.close();
+        return items;
+    }
 }

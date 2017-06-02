@@ -1,5 +1,6 @@
 package com.revotechs.calculator.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,9 +13,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.revotechs.calculator.R;
 import com.revotechs.calculator.adapters.RecyclerViewAdapter;
@@ -26,13 +30,24 @@ import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    //TODO Поиск по записям
-
     public static final String EXTRA_EXPRESSION_NAME = "expression";
+    RecyclerView historyView;
+    TextView searchView;
+    LinearLayoutManager manager;
+    RecyclerViewAdapter adapter;
+    RecyclerView.ItemDecoration itemDecoration;
+    List<HistoryItem> items;
     private String[] listMenuItems;
     private HistoryDao historyDao = HistoryDao.getInstance();
     private int screenWidth;
     private float xCoord;
+    private String searchString = "";
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.history_menu, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +59,23 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
         display.getSize(size);
         screenWidth = size.x;
 
-        final RecyclerView historyView = (RecyclerView) findViewById(R.id.history_view);
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        historyView = (RecyclerView) findViewById(R.id.history_view);
+
+        manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         historyView.setLayoutManager(manager);
-        final List<HistoryItem> items = historyDao.getAll(historyView.getContext());
-        final RecyclerViewAdapter adapter = new RecyclerViewAdapter(items);
+
+        if (searchString.isEmpty()) {
+            items = historyDao.getAll(historyView.getContext());
+        } else {
+            items = historyDao.search(searchString, historyView.getContext());
+        }
+
+        adapter = new RecyclerViewAdapter(items);
         historyView.setAdapter(adapter);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
+
+        itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
         historyView.addItemDecoration(itemDecoration);
+
         historyView.setOnTouchListener(this);
         historyView.addOnItemTouchListener(new RecyclerItemClickListener(historyView.getContext(), historyView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -137,11 +161,8 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                 });
                 AlertDialog alert = menuBuilder.create();
                 alert.show();
-
-
             }
         }));
-
     }
 
     @Override
@@ -159,5 +180,51 @@ public class HistoryActivity extends AppCompatActivity implements View.OnTouchLi
                 }
         }
         return false;
+    }
+
+    public void onClickSearch(MenuItem item) {
+        final Context context = HistoryActivity.this;
+        AlertDialog.Builder searchBuilder = new AlertDialog.Builder(context);
+        final EditText input = new EditText(context);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        searchBuilder
+                .setTitle(R.string.search)
+                .setView(input)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        searchString = input.getText().toString();
+                        items = historyDao.search(searchString, historyView.getContext());
+                        adapter = new RecyclerViewAdapter(items);
+                        historyView.setAdapter(adapter);
+                        itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
+                        historyView.addItemDecoration(itemDecoration);
+                        adapter.notifyDataSetChanged();
+                        searchView = (TextView) findViewById(R.id.search_view);
+                        searchView.setText(String.format("%s%s", getString(R.string.search_title), searchString));
+                        searchView.setVisibility(View.VISIBLE);
+                        searchView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                searchString = "";
+                                items = historyDao.getAll(historyView.getContext());
+                                adapter = new RecyclerViewAdapter(items);
+                                historyView.setAdapter(adapter);
+                                itemDecoration = new DividerItemDecoration(historyView.getContext(), DividerItemDecoration.VERTICAL);
+                                historyView.addItemDecoration(itemDecoration);
+                                adapter.notifyDataSetChanged();
+                                searchView.setVisibility(View.GONE);
+                            }
+                        });
+                    }
+                });
+        AlertDialog alertSearch = searchBuilder.create();
+        alertSearch.show();
     }
 }

@@ -72,38 +72,38 @@ public class HistoryDao {
         return id;
     }
 
-//    public HistoryItem getOne(Long id, Context context) {
-//        dbHelper = new DBHelper(context);
-//        db = dbHelper.getReadableDatabase();
-//        HistoryItem item = new HistoryItem();
-//        Cursor cursor = db.query(TABLE_HISTORY, null, FIELD_ID + " = ?", new String[] {id.toString()}, null, null, null);
-//        if (cursor.moveToFirst()) {
-//            int idColIndex = cursor.getColumnIndex(FIELD_ID);
-//            int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
-//            int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
-//            int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
-//            int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
-//            int lockedColIndex = cursor.getColumnIndex(FIELD_LOCKED);
-//            do {
-//                item.setId(cursor.getLong(idColIndex));
-//                item.setDate(cursor.getString(dateColIndex));
-//                item.setExpression(cursor.getString(expressionColIndex));
-//                item.setResult(cursor.getString(resultColIndex));
-//                item.setComment(cursor.getString(commentColIndex));
-//                if (cursor.getInt(lockedColIndex) == 1) {
-//                    item.setLocked(true);
-//                } else {
-//                    item.setLocked(false);
-//                }
-//            } while (cursor.moveToNext());
-//        } else {
-//            Log.d(HISTORY_DAO, NO_DATA);
-//        }
-//        Log.d(HISTORY_DAO, item.toString());
-//        cursor.close();
-//        dbHelper.close();
-//        return item;
-//    }
+    public HistoryItem getOne(Long id, Context context) {
+        dbHelper = new DBHelper(context);
+        db = dbHelper.getReadableDatabase();
+        HistoryItem item = new HistoryItem();
+        Cursor cursor = db.query(TABLE_HISTORY, null, FIELD_ID + " = ?", new String[] {id.toString()}, null, null, null);
+        if (cursor.moveToFirst()) {
+            int idColIndex = cursor.getColumnIndex(FIELD_ID);
+            int dateColIndex = cursor.getColumnIndex(FIELD_DATE);
+            int expressionColIndex = cursor.getColumnIndex(FIELD_EXPRESSION);
+            int resultColIndex = cursor.getColumnIndex(FIELD_RESULT);
+            int commentColIndex = cursor.getColumnIndex(FIELD_COMMENT);
+            int lockedColIndex = cursor.getColumnIndex(FIELD_LOCKED);
+            do {
+                item.setId(cursor.getLong(idColIndex));
+                item.setDate(cursor.getString(dateColIndex));
+                item.setExpression(cursor.getString(expressionColIndex));
+                item.setResult(cursor.getString(resultColIndex));
+                item.setComment(cursor.getString(commentColIndex));
+                if (cursor.getInt(lockedColIndex) == 1) {
+                    item.setLocked(true);
+                } else {
+                    item.setLocked(false);
+                }
+            } while (cursor.moveToNext());
+        } else {
+            Log.d(HISTORY_DAO, NO_DATA);
+        }
+        Log.d(HISTORY_DAO, item.toString());
+        cursor.close();
+        dbHelper.close();
+        return item;
+    }
 
     public List<HistoryItem> getAll(Context context) {
         dbHelper = new DBHelper(context);

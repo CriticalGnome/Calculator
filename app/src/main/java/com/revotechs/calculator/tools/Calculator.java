@@ -15,7 +15,6 @@ import java.util.StringTokenizer;
 
 /**
  * Project Calculator
- *
  * Created on 26.05.2017
  * @author CriticalGnome
  */

@@ -16,7 +16,6 @@ import java.util.Locale
  * Created on 29.05.2017
  * @author CriticalGnome
  */
-
 class RecyclerViewAdapter(private val historyItems: List<HistoryItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

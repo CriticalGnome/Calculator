@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:text="@string/_1"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_2"
@@ -81,7 +81,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:text="@string/_2"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_3"
@@ -286,7 +286,7 @@
             android:layout_weight="3"
             android:fontFamily="monospace"
             android:text="@string/equal"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
         <Button
             android:id="@+id/button_back"
@@ -296,7 +296,7 @@
             android:layout_weight="1"
             android:fontFamily="monospace"
             android:text="@string/back"
-            android:textSize="24sp" />
+            android:textSize="24sp"/>
 
     </LinearLayout>
 

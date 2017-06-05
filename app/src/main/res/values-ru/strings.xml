@@ -26,4 +26,5 @@
     <string name="clear">Очистить</string>
     <string name="clear_history_message">Очистить историю?</string>
     <string name="lock">заблокировано</string>
+    <string name="history">История</string>
 </resources>

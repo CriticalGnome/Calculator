@@ -10,11 +10,9 @@ import java.util.*
 
 /**
  * Project Calculator
-
  * Created on 30.05.2017
  * @author CriticalGnome
  */
-
 class HistoryDao {
 
     fun create(item: HistoryItem, context: Context): Long {

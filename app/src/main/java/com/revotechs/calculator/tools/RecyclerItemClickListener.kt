@@ -11,7 +11,6 @@ import android.view.View
  * Created on 29.05.2017
  * @author CriticalGnome
  */
-
 class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, private val mListener: RecyclerItemClickListener.OnItemClickListener?) : RecyclerView.OnItemTouchListener {
 
     interface OnItemClickListener {

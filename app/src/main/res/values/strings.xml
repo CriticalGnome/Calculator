@@ -47,4 +47,5 @@
     <string name="clear">Clear history</string>
     <string name="clear_history_message">Clear history?</string>
     <string name="lock">Locked</string>
+    <string name="history">History</string>
 </resources>

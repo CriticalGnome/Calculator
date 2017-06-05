@@ -7,13 +7,9 @@ import android.util.Log
 
 /**
  * Project Calculator
- *
- *
  * Created on 30.05.2017
-
  * @author CriticalGnome
  */
-
 class DBHelper(context: Context) : SQLiteOpenHelper(context, "CalcDB", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase) {

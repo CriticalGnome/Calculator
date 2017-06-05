@@ -4,6 +4,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.revotechs.calculator.R
 import com.revotechs.calculator.dao.HistoryDao
@@ -21,6 +23,11 @@ import java.util.*
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val calculator = Calculator()
     private val historyDao = HistoryDao()
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,6 +152,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         button_left_brace.setOnClickListener(this)
         button_right_brace.setOnClickListener(this)
+    }
+
+    fun onClickHistory(item: MenuItem) {
+        val context = this@MainActivity
+        val intent = Intent(context, HistoryActivity::class.java)
+        startActivityForResult(intent, RESULT_CODE_FROM_HISTORY)
     }
 
     companion object {

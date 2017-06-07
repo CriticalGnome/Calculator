@@ -10,7 +10,7 @@ import android.view.View
 import com.revotechs.calculator.R
 import com.revotechs.calculator.dao.HistoryDao
 import com.revotechs.calculator.entities.HistoryItem
-import com.revotechs.calculator.tools.Calculator
+import com.revotechs.calculator.tools.MathParser
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,7 +21,8 @@ import java.util.*
  * @author CriticalGnome
  */
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private val calculator = Calculator()
+
+    private val mathParser = MathParser()
     private val historyDao = HistoryDao()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             initAdditionalFields()
         }
 
-        result_view.text = calculator.calc(expression).toString()
+        result_view.text = NULL_VALUE
         current_vew.text = expression
 
     }
@@ -49,25 +50,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (data != null) {
             expression = data.getStringExtra("expression")
         }
-        result_view.text = calculator.calc(expression).toString()
+        result_view.text = mathParser.parse(expression).toString()
         current_vew.text = expression
     }
 
     override fun onClick(v: View) {
 
         when (v.id) {
-            R.id.button_reset -> {
-                expression = NULL_VALUE
-                comma = false
-            }
-            R.id.button_back -> {
-                if (!expression.isEmpty()) {
-                    expression = expression.substring(0, expression.length - 1)
-                }
-                if (expression.isEmpty()) {
-                    expression = NULL_VALUE
-                }
-            }
+
+            // Numbers
             R.id.button_0 -> expression = (if (expression == NULL_VALUE) "0" else expression + "0")
             R.id.button_1 -> expression = (if (expression == NULL_VALUE) "1" else expression + "1")
             R.id.button_2 -> expression = (if (expression == NULL_VALUE) "2" else expression + "2")
@@ -78,25 +69,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.button_7 -> expression = (if (expression == NULL_VALUE) "7" else expression + "7")
             R.id.button_8 -> expression = (if (expression == NULL_VALUE) "8" else expression + "8")
             R.id.button_9 -> expression = (if (expression == NULL_VALUE) "9" else expression + "9")
+
+            // Constants
+            R.id.button_e -> expression = (if (expression == NULL_VALUE) "e" else expression + "e")
+            R.id.button_pi -> expression = (if (expression == NULL_VALUE) "pi" else expression + "pi")
+
+            // Functions
+            R.id.button_sin -> expression = (if (expression == NULL_VALUE) "sin(" else expression + "sin(")
+            R.id.button_cos -> expression = (if (expression == NULL_VALUE) "cos(" else expression + "cos(")
+            R.id.button_tan -> expression = (if (expression == NULL_VALUE) "tan(" else expression + "tan(")
+            R.id.button_ctg -> expression = (if (expression == NULL_VALUE) "ctg(" else expression + "ctg(")
+            R.id.button_ln -> expression = (if (expression == NULL_VALUE) "ln(" else expression + "ln(")
+            R.id.button_lg -> expression = (if (expression == NULL_VALUE) "lg(" else expression + "lg(")
+            R.id.button_sqrt -> expression = (if (expression == NULL_VALUE) "sqrt(" else expression + "sqrt(")
+
+            // Braces
             R.id.button_left_brace -> expression = (if (expression == NULL_VALUE) "(" else expression + "(")
             R.id.button_right_brace -> expression = (if (expression == NULL_VALUE) ")" else expression + ")")
-            R.id.button_comma -> if (!comma) {
-                expression += "."
-                comma = true
-            }
-            R.id.button_add -> { comma = false; expression += "+" }
-            R.id.button_sub -> { comma = false; expression += "-" }
-            R.id.button_mul -> { comma = false; expression += "*" }
-            R.id.button_div -> { comma = false; expression += "/" }
+
+            // Symbols
+            R.id.button_exponentiation -> expression += "^"
+            R.id.button_comma -> expression += "."
+            R.id.button_add -> expression += "+"
+            R.id.button_sub -> expression += "-"
+            R.id.button_mul -> expression += "*"
+            R.id.button_div -> expression += "/"
+
+            // Equal
             R.id.button_equal -> {
-                comma = false
-                var result = calculator.calc(expression)
-                if (result == "Wrong format") {
-                    result = R.string.wrong_format.toString()
-                }
-                if (result == "Division by zero") {
-                    result = R.string.division_by_zero.toString()
-                }
+                val result = mathParser.parse(expression).toString()
                 historyDao.create(
                         HistoryItem(
                             null,
@@ -107,10 +108,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             false),
                         v.context)
                 expression = result
-                if (expression.contains(".")) {
-                    comma = true
+            }
+
+            //Reset
+            R.id.button_reset -> {
+                expression = NULL_VALUE
+            }
+
+            // Backspace
+            R.id.button_back -> {
+                if (!expression.isEmpty()) {
+                    expression = expression.substring(0, expression.length - 1)
+                }
+                if (expression.isEmpty()) {
+                    expression = NULL_VALUE
                 }
             }
+
+            // Switch to history
             R.id.current_vew -> {
                 val intent = Intent(this, HistoryActivity::class.java)
                 startActivityForResult(intent, RESULT_CODE_FROM_HISTORY)
@@ -119,7 +134,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        result_view.text = calculator.calc(expression).toString()
+        if (mathParser.parse(expression) != 0.0) {
+            result_view.text = mathParser.parse(expression).toString()
+        }
         current_vew.text = expression
 
     }
@@ -152,6 +169,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         button_left_brace.setOnClickListener(this)
         button_right_brace.setOnClickListener(this)
+        button_sqrt.setOnClickListener(this)
+        button_exponentiation.setOnClickListener(this)
+        button_sin.setOnClickListener(this)
+        button_cos.setOnClickListener(this)
+        button_tan.setOnClickListener(this)
+        button_ctg.setOnClickListener(this)
+        button_ln.setOnClickListener(this)
+        button_lg.setOnClickListener(this)
+        button_pi.setOnClickListener(this)
+        button_e.setOnClickListener(this)
     }
 
     fun onClickHistory(item: MenuItem) {
@@ -165,7 +192,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         private val DATE_FORMAT = "EEEE, dd MMMM yyyy, H:mm:ss"
         private val NULL_VALUE = "0"
         private var expression = NULL_VALUE
-        private var comma: Boolean = false
         val RESULT_CODE_FROM_HISTORY = 404
     }
 }

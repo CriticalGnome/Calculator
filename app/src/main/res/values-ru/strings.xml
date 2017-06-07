@@ -27,4 +27,14 @@
     <string name="clear_history_message">Очистить историю?</string>
     <string name="lock">заблокировано</string>
     <string name="history">История</string>
+    <string name="exponentiation">^</string>
+    <string name="sqrt">√</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="ctg">ctg</string>
+    <string name="ln">ln</string>
+    <string name="lg">lg</string>
+    <string name="pi">π</string>
+    <string name="e">e</string>
 </resources>

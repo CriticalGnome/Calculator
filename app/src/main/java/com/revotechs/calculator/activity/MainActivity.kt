@@ -1,4 +1,4 @@
-package com.revotechs.calculator.activities
+package com.revotechs.calculator.activity
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -9,8 +9,8 @@ import android.view.MenuItem
 import android.view.View
 import com.revotechs.calculator.R
 import com.revotechs.calculator.dao.HistoryDao
-import com.revotechs.calculator.entities.HistoryItem
-import com.revotechs.calculator.tools.MathParser
+import com.revotechs.calculator.entitiy.HistoryItem
+import com.revotechs.calculator.tool.MathParser
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*

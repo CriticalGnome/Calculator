@@ -1,4 +1,4 @@
-package com.revotechs.calculator.tools;
+package com.revotechs.calculator.tool;
 
 import java.util.HashMap;
 

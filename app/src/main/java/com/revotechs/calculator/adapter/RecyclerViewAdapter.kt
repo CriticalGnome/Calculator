@@ -1,4 +1,4 @@
-package com.revotechs.calculator.adapters
+package com.revotechs.calculator.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.revotechs.calculator.R
-import com.revotechs.calculator.entities.HistoryItem
+import com.revotechs.calculator.entitiy.HistoryItem
 import java.util.Locale
 
 /**

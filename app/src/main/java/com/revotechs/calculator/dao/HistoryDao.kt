@@ -4,8 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
-import com.revotechs.calculator.entities.HistoryItem
-import com.revotechs.calculator.tools.DBHelper
+import com.revotechs.calculator.entitiy.HistoryItem
+import com.revotechs.calculator.tool.DBHelper
 import java.util.*
 
 /**

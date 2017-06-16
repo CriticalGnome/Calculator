@@ -1,4 +1,4 @@
-package com.revotechs.calculator.tools
+package com.revotechs.calculator.tool
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

@@ -1,4 +1,4 @@
-package com.revotechs.calculator.entities
+package com.revotechs.calculator.entitiy
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package com.revotechs.calculator.activities
+package com.revotechs.calculator.activity
 
 import android.R.color.white
 import android.app.Activity
@@ -17,10 +17,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import com.revotechs.calculator.R
-import com.revotechs.calculator.adapters.RecyclerViewAdapter
+import com.revotechs.calculator.adapter.RecyclerViewAdapter
 import com.revotechs.calculator.dao.HistoryDao
-import com.revotechs.calculator.entities.HistoryItem
-import com.revotechs.calculator.tools.RecyclerItemClickListener
+import com.revotechs.calculator.entitiy.HistoryItem
+import com.revotechs.calculator.tool.RecyclerItemClickListener
 import kotlinx.android.synthetic.main.activity_history.*
 
 /**

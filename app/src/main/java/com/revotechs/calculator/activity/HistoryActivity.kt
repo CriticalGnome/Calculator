@@ -32,7 +32,7 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener {
 
     private val historyDao = HistoryDao()
     private var screenWidth: Int = 0
-    private var xCoord: Float = 0.toFloat()
+    private var xCoordinate: Float = 0.toFloat()
     private var searchString = ""
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -140,10 +140,10 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener {
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> xCoord = event.x
+            MotionEvent.ACTION_DOWN -> xCoordinate = event.x
             MotionEvent.ACTION_UP ->
 
-                if (event.x - xCoord > screenWidth / 2) {
+                if (event.x - xCoordinate > screenWidth / 2) {
                     val i = Intent(v.context, MainActivity::class.java)
                     startActivity(i)
                     finish()

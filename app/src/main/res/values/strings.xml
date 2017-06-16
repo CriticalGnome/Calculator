@@ -30,7 +30,7 @@
     <string name="division_by_zero">Division by zero</string>
     <string name="id" translatable="false">id</string>
     <string name="comment">Comment</string>
-    <string name="history_item_alert_title">Choise action</string>
+    <string name="history_item_alert_title">Choice action</string>
     <string-array name="history_item_alert_menu">
         <item>Comment</item>
         <item>Delete row</item>

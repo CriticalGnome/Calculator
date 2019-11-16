@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="searchString">#ffd29f</color>
     <color name="searchStringEmpty">#ff6456</color>
+    <color name="divider_color">#999999</color>
 </resources>

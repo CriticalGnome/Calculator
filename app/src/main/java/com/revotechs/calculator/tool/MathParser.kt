@@ -1,6 +1,7 @@
 package com.revotechs.calculator.tool
 
 import java.util.HashMap
+import kotlin.math.*
 
 /**
 
@@ -47,7 +48,7 @@ import java.util.HashMap
  */
 class MathParser {
     init {
-        `var` = HashMap<String, Double>()
+        `var` = HashMap()
         setVariable("pi", Math.PI)
         setVariable("e", Math.E)
     }
@@ -92,7 +93,7 @@ class MathParser {
             return 0.0
         }
 
-        if (!result.rest.isEmpty())
+        if (result.rest.isNotEmpty())
             return 0.0
         return result.acc
     }
@@ -126,10 +127,10 @@ class MathParser {
             cur = plusMinus(next)
 
 
-            if (sign == '&')
-                acc = (acc.toInt() and cur.acc.toInt()).toDouble()
+            acc = if (sign == '&')
+                (acc.toInt() and cur.acc.toInt()).toDouble()
             else
-                acc = (acc.toInt() or cur.acc.toInt()).toDouble()
+                (acc.toInt() or cur.acc.toInt()).toDouble()
         }
 
         return Result(acc, cur.rest)
@@ -192,7 +193,6 @@ class MathParser {
         }
     }
 
-
     @Throws(Exception::class)
     private fun exponentiation(s: String): Result {
         var cur = bracket(s)
@@ -207,11 +207,10 @@ class MathParser {
 
             val next = cur.rest.substring(1)
             cur = bracket(next)
-            cur.acc = Math.pow(acc, cur.acc)
+            cur.acc = acc.pow(cur.acc)
         }
         return cur
     }
-
 
     @Throws(Exception::class)
     private fun bracket(str: String): Result {
@@ -221,7 +220,7 @@ class MathParser {
         val zeroChar = s[0]
         if (zeroChar == '(') {
             val r = binaryFunc(s.substring(1))
-            if (!r.rest.isEmpty()) {
+            if (r.rest.isNotEmpty()) {
                 r.rest = r.rest.substring(1)
             } else {
                 throw Exception("Expected closing bracket")
@@ -241,22 +240,22 @@ class MathParser {
             f += s[i]
             i++
         }
-        if (!f.isEmpty()) { // если что-нибудь нашли
+        if (f.isNotEmpty()) { // если что-нибудь нашли
             if (s.length > i && s[i] == '(') {
                 // и следующий символ скобка значит - это функция
                 var r = binaryFunc(s.substring(f.length + 1))
 
-                if (!r.rest.isEmpty() && r.rest[0] == ',') {
+                return if (r.rest.isNotEmpty() && r.rest[0] == ',') {
                     // если функция с двумя параметрами
                     val acc = r.acc
                     var r2 = binaryFunc(r.rest.substring(1))
 
                     r2 = closeBracket(r2)
-                    return processFunction(f, acc, r2)
+                    processFunction(f, acc, r2)
 
                 } else {
                     r = closeBracket(r)
-                    return processFunction(f, r)
+                    processFunction(f, r)
                 }
             } else { // иначе - это переменная
                 return Result(getVariable(f)!!, s.substring(f.length))
@@ -267,7 +266,7 @@ class MathParser {
 
     @Throws(Exception::class)
     private fun closeBracket(r: Result): Result {
-        if (!r.rest.isEmpty() && r.rest[0] == ')') {
+        if (r.rest.isNotEmpty() && r.rest[0] == ')') {
             r.rest = r.rest.substring(1)
         } else
             throw Exception("Expected closing bracket")
@@ -278,7 +277,7 @@ class MathParser {
     private fun num(str: String): Result {
         var s = str
         var i = 0
-        var dot_cnt = 0
+        var dotCnt = 0
         var negative = false
         // число также может начинаться с минуса
         if (s[0] == '-') {
@@ -288,7 +287,7 @@ class MathParser {
         // разрешаем только цифры и точку
         while (i < s.length && (Character.isDigit(s[i]) || s[i] == '.')) {
             // но также проверяем, что в числе может быть только одна точка!
-            if (s[i] == '.' && ++dot_cnt > 1) {
+            if (s[i] == '.' && ++dotCnt > 1) {
                 throw Exception("not valid number '"
                         + s.substring(0, i + 1) + "'")
             }
@@ -308,25 +307,25 @@ class MathParser {
     @Throws(Exception::class)
     private fun processFunction(func: String, r: Result): Result {
         when (func) {
-            "sin" -> return Result(Math.sin(r.acc), r.rest)
+            "sin" -> return Result(sin(r.acc), r.rest)
             "sinh" // гиперболический синус
-            -> return Result(Math.sinh(r.acc), r.rest)
-            "cos" -> return Result(Math.cos(r.acc), r.rest)
+            -> return Result(sinh(r.acc), r.rest)
+            "cos" -> return Result(cos(r.acc), r.rest)
             "cosh" // гиперболический косинус
-            -> return Result(Math.cosh(r.acc), r.rest)
-            "tan" -> return Result(Math.tan(r.acc), r.rest)
+            -> return Result(cosh(r.acc), r.rest)
+            "tan" -> return Result(tan(r.acc), r.rest)
             "tanh" // гиперболический тангенс
-            -> return Result(Math.tanh(r.acc), r.rest)
-            "ctg" -> return Result(1 / Math.tan(r.acc), r.rest)
+            -> return Result(tanh(r.acc), r.rest)
+            "ctg" -> return Result(1 / tan(r.acc), r.rest)
             "sec" // секанс
-            -> return Result(1 / Math.cos(r.acc), r.rest)
+            -> return Result(1 / cos(r.acc), r.rest)
             "cosec" // косеканс
-            -> return Result(1 / Math.sin(r.acc), r.rest)
-            "abs" -> return Result(Math.abs(r.acc), r.rest)
-            "ln" -> return Result(Math.log(r.acc), r.rest)
+            -> return Result(1 / sin(r.acc), r.rest)
+            "abs" -> return Result(abs(r.acc), r.rest)
+            "ln" -> return Result(ln(r.acc), r.rest)
             "lg" // десятичный логарифм
-            -> return Result(Math.log10(r.acc), r.rest)
-            "sqrt" -> return Result(Math.sqrt(r.acc), r.rest)
+            -> return Result(log10(r.acc), r.rest)
+            "sqrt" -> return Result(sqrt(r.acc), r.rest)
             else -> throw Exception("function '$func' is not defined")
         }
     }
@@ -335,12 +334,12 @@ class MathParser {
     private fun processFunction(func: String,
                                 acc: Double,
                                 r: Result): Result {
-        when (func) {
+        return when (func) {
             "log" // логарифм x по основанию y
-            -> return Result(Math.log(acc) / Math.log(r.acc),
+            -> Result(ln(acc) / ln(r.acc),
                     r.rest)
             "xor" // исключающее или
-            -> return Result((acc.toInt() xor r.acc.toInt()).toDouble(), r.rest)
+            -> Result((acc.toInt() xor r.acc.toInt()).toDouble(), r.rest)
             else -> throw Exception("function '" + func +
                     "' is not defined")
         }
@@ -366,7 +365,7 @@ class MathParser {
          * @param varValue значение переменной
          */
         private fun setVariable(varName: String, varValue: Double) {
-            `var`.put(varName, varValue)
+            `var`[varName] = varValue
         }
     }
 }

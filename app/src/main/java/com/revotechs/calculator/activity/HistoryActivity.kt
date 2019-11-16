@@ -5,17 +5,17 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.revotechs.calculator.R
 import com.revotechs.calculator.adapter.RecyclerViewAdapter
 import com.revotechs.calculator.dao.HistoryDao
@@ -52,11 +52,10 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener {
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         history_view.layoutManager = manager
 
-        val items: ArrayList<HistoryItem>
-        if (searchString.isEmpty()) {
-            items = historyDao.getAll(history_view.context) as ArrayList<HistoryItem>
+        val items: ArrayList<HistoryItem> = if (searchString.isEmpty()) {
+            historyDao.getAll(history_view.context) as ArrayList<HistoryItem>
         } else {
-            items = historyDao.search(searchString, history_view.context) as ArrayList<HistoryItem>
+            historyDao.search(searchString, history_view.context) as ArrayList<HistoryItem>
         }
         val adapter = RecyclerViewAdapter(items)
         history_view.adapter = adapter
@@ -139,6 +138,7 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener {
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
+        v.performClick()
         when (event.action) {
             MotionEvent.ACTION_DOWN -> xCoordinate = event.x
             MotionEvent.ACTION_UP ->
@@ -213,9 +213,9 @@ class HistoryActivity : AppCompatActivity(), View.OnTouchListener {
 
     companion object {
 
-        private val EXTRA_EXPRESSION_NAME = "expression"
-        private val MENU_COMMENT = 0
-        private val MENU_DELETE = 1
-        private val MENU_LOCK = 2
+        private const val EXTRA_EXPRESSION_NAME = "expression"
+        private const val MENU_COMMENT = 0
+        private const val MENU_DELETE = 1
+        private const val MENU_LOCK = 2
     }
 }

@@ -3,10 +3,10 @@ package com.revotechs.calculator.activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.revotechs.calculator.R
 import com.revotechs.calculator.dao.HistoryDao
 import com.revotechs.calculator.entitiy.HistoryItem
@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
+        super.onActivityResult(requestCode, resultCode, data)
         if (data != null) {
-            expression = data.getStringExtra("expression")
+            expression = data.getStringExtra("expression")!!
         }
         result_view.text = mathParser.parse(expression).toString()
         current_vew.text = expression
@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.button_sqrt -> expression = (if (expression == NULL_VALUE) "sqrt(" else expression + "sqrt(")
 
             // Braces
-            R.id.button_left_brace -> expression = (if (expression == NULL_VALUE) "(" else expression + "(")
-            R.id.button_right_brace -> expression = (if (expression == NULL_VALUE) ")" else expression + ")")
+            R.id.button_left_brace -> expression = (if (expression == NULL_VALUE) "(" else "$expression(")
+            R.id.button_right_brace -> expression = (if (expression == NULL_VALUE) ")" else "$expression)")
 
             // Symbols
             R.id.button_exponentiation -> expression += "^"
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             // Backspace
             R.id.button_back -> {
-                if (!expression.isEmpty()) {
+                if (expression.isNotEmpty()) {
                     expression = expression.substring(0, expression.length - 1)
                 }
                 if (expression.isEmpty()) {
@@ -167,18 +167,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initAdditionalFields() {
 
-        button_left_brace.setOnClickListener(this)
-        button_right_brace.setOnClickListener(this)
-        button_sqrt.setOnClickListener(this)
-        button_exponentiation.setOnClickListener(this)
-        button_sin.setOnClickListener(this)
-        button_cos.setOnClickListener(this)
-        button_tan.setOnClickListener(this)
-        button_ctg.setOnClickListener(this)
-        button_ln.setOnClickListener(this)
-        button_lg.setOnClickListener(this)
-        button_pi.setOnClickListener(this)
-        button_e.setOnClickListener(this)
+        button_left_brace?.setOnClickListener(this)
+        button_right_brace?.setOnClickListener(this)
+        button_sqrt?.setOnClickListener(this)
+        button_exponentiation?.setOnClickListener(this)
+        button_sin?.setOnClickListener(this)
+        button_cos?.setOnClickListener(this)
+        button_tan?.setOnClickListener(this)
+        button_ctg?.setOnClickListener(this)
+        button_ln?.setOnClickListener(this)
+        button_lg?.setOnClickListener(this)
+        button_pi?.setOnClickListener(this)
+        button_e?.setOnClickListener(this)
     }
 
     fun onClickHistory(item: MenuItem) {
@@ -189,9 +189,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
 
-        private val DATE_FORMAT = "EEEE, dd MMMM yyyy, H:mm:ss"
-        private val NULL_VALUE = "0"
+        private const val DATE_FORMAT = "EEEE, dd MMMM yyyy, H:mm:ss"
+        private const val NULL_VALUE = "0"
         private var expression = NULL_VALUE
-        val RESULT_CODE_FROM_HISTORY = 404
+        const val RESULT_CODE_FROM_HISTORY = 404
     }
 }

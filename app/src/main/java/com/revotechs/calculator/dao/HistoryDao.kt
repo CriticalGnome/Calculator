@@ -138,15 +138,15 @@ class HistoryDao {
 
     companion object {
 
-        private val HISTORY_DAO = "historyDAO"
-        private val TABLE_HISTORY = "history"
-        private val FIELD_ID = "id"
-        private val FIELD_DATE = "date"
-        private val FIELD_EXPRESSION = "expression"
-        private val FIELD_RESULT = "result"
-        private val FIELD_COMMENT = "comment"
-        private val FIELD_LOCKED = "locked"
-        private val NO_DATA = "No data"
+        private const val HISTORY_DAO = "historyDAO"
+        private const val TABLE_HISTORY = "history"
+        private const val FIELD_ID = "id"
+        private const val FIELD_DATE = "date"
+        private const val FIELD_EXPRESSION = "expression"
+        private const val FIELD_RESULT = "result"
+        private const val FIELD_COMMENT = "comment"
+        private const val FIELD_LOCKED = "locked"
+        private const val NO_DATA = "No data"
 
     }
 }

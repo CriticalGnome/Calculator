@@ -1,17 +1,17 @@
 package com.revotechs.calculator.tool
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Project Calculator
  * Created on 29.05.2017
  * @author CriticalGnome
  */
-class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, private val mListener: RecyclerItemClickListener.OnItemClickListener?) : RecyclerView.OnItemTouchListener {
+class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, private val mListener: OnItemClickListener?) : RecyclerView.OnItemTouchListener {
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)

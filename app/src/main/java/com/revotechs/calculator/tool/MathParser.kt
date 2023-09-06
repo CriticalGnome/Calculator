@@ -350,8 +350,9 @@ class MathParser {
     }
 
 
-    private inner class Result internal constructor(internal var acc: Double // Аккумулятор
-                                                    , internal var rest: String // остаток строки, которую мы еще не обработали
+    private inner class Result(
+        var acc: Double, // Аккумулятор
+        var rest: String // остаток строки, которую мы еще не обработали
     )
 
     companion object {

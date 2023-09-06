@@ -5,476 +5,224 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.revotechs.calculator.activity.MainActivity"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:context="com.revotechs.calculator.activity.MainActivity">
 
     <!--Expressions-->
 
     <TextView
         android:id="@+id/result_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_weight="1"
+        android:layout_margin="8dp"
         android:fontFamily="monospace"
         android:text="@string/result_text"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textSize="18sp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/current_vew"
-        android:layout_width="0dp"
+        android:id="@+id/current_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_margin="8dp"
         android:fontFamily="monospace"
         android:text="@string/expression_text"
         android:textAlignment="textEnd"
         android:textAllCaps="true"
         android:textAppearance="@android:style/TextAppearance.Material.Title"
         android:textSize="36sp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_view" />
 
-    <!--First row-->
+    <!-- First row -->
 
-    <View
-        android:id="@+id/horizontalDivider1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/current_vew"
-        app:layout_constraintBottom_toTopOf="@id/button_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_1"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
+        app:layout_constraintTop_toBottomOf="@id/current_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider11"
-        />
-
-    <View
-        android:id="@+id/verticalDivider11"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/button_1"
         app:layout_constraintEnd_toStartOf="@id/button_2"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_4"
+        app:text="@string/_1" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_2"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider11"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider12"
-        />
-
-    <View
-        android:id="@+id/verticalDivider12"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/button_2"
+        app:layout_constraintTop_toBottomOf="@id/current_view"
+        app:layout_constraintStart_toEndOf="@id/button_1"
         app:layout_constraintEnd_toStartOf="@id/button_3"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_5"
+        app:text="@string/_2" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_3"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider12"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider13"
-        />
-
-    <View
-        android:id="@+id/verticalDivider13"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/button_3"
+        app:layout_constraintTop_toBottomOf="@id/current_view"
+        app:layout_constraintStart_toEndOf="@id/button_2"
         app:layout_constraintEnd_toStartOf="@id/button_add"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_6"
+        app:text="@string/_3" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_add"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/add"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider1"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider2"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider13"
+        app:layout_constraintTop_toBottomOf="@id/current_view"
+        app:layout_constraintStart_toEndOf="@id/button_3"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_sub"
+        app:text="@string/add" />
 
     <!--Second row-->
 
-    <View
-        android:id="@+id/horizontalDivider2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/button_1"
-        app:layout_constraintBottom_toTopOf="@id/button_4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_4"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
+        app:layout_constraintTop_toBottomOf="@id/button_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider21"
-        />
-
-    <View
-        android:id="@+id/verticalDivider21"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/button_4"
         app:layout_constraintEnd_toStartOf="@id/button_5"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_7"
+        app:text="@string/_4" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_5"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_5"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider21"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider22"
-        />
-
-    <View
-        android:id="@+id/verticalDivider22"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/button_5"
+        app:layout_constraintTop_toBottomOf="@id/button_2"
+        app:layout_constraintStart_toEndOf="@id/button_4"
         app:layout_constraintEnd_toStartOf="@id/button_6"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_8"
+        app:text="@string/_5" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_6"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider22"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider23"
-        />
-
-    <View
-        android:id="@+id/verticalDivider23"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/button_6"
+        app:layout_constraintTop_toBottomOf="@id/button_3"
+        app:layout_constraintStart_toEndOf="@id/button_5"
         app:layout_constraintEnd_toStartOf="@id/button_sub"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_9"
+        app:text="@string/_6" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_sub"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/sub"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider2"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider3"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider23"
+        app:layout_constraintTop_toBottomOf="@id/button_add"
+        app:layout_constraintStart_toEndOf="@id/button_6"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_mul"
+        app:text="@string/sub" />
 
     <!--Third row-->
 
-    <View
-        android:id="@+id/horizontalDivider3"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/button_4"
-        app:layout_constraintBottom_toTopOf="@id/button_7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_7"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_7"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
+        app:layout_constraintTop_toBottomOf="@id/button_4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider31"
-        />
-
-    <View
-        android:id="@+id/verticalDivider31"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/button_7"
         app:layout_constraintEnd_toStartOf="@id/button_8"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_reset"
+        app:text="@string/_7" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_8"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_8"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider31"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider32"
-        />
-
-    <View
-        android:id="@+id/verticalDivider32"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/button_8"
+        app:layout_constraintTop_toBottomOf="@id/button_5"
+        app:layout_constraintStart_toEndOf="@id/button_7"
         app:layout_constraintEnd_toStartOf="@id/button_9"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_0"
+        app:text="@string/_8" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_9"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_9"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider32"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider33"
-        />
-
-    <View
-        android:id="@+id/verticalDivider33"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/button_9"
+        app:layout_constraintTop_toBottomOf="@id/button_6"
+        app:layout_constraintStart_toEndOf="@id/button_8"
         app:layout_constraintEnd_toStartOf="@id/button_mul"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_comma"
+        app:text="@string/_9" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_mul"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/mul"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider3"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider4"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider33"
+        app:layout_constraintTop_toBottomOf="@id/button_sub"
+        app:layout_constraintStart_toEndOf="@id/button_9"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_div"
+        app:text="@string/mul" />
 
     <!--Fourth row-->
 
-    <View
-        android:id="@+id/horizontalDivider4"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/button_7"
-        app:layout_constraintBottom_toTopOf="@id/button_reset"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_reset"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_0"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
+        app:layout_constraintTop_toBottomOf="@id/button_7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider41"
-        />
-
-    <View
-        android:id="@+id/verticalDivider41"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/button_reset"
         app:layout_constraintEnd_toStartOf="@id/button_0"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_equal"
+        app:text="@string/reset" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_0"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/_0"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider41"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider42"
-        />
-
-    <View
-        android:id="@+id/verticalDivider42"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/button_0"
+        app:layout_constraintTop_toBottomOf="@id/button_8"
+        app:layout_constraintStart_toEndOf="@id/button_reset"
         app:layout_constraintEnd_toStartOf="@id/button_comma"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_equal"
+        app:text="@string/_0" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_comma"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/comma"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider42"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider43"
-        />
-
-    <View
-        android:id="@+id/verticalDivider43"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/button_comma"
+        app:layout_constraintTop_toBottomOf="@id/button_9"
+        app:layout_constraintStart_toEndOf="@id/button_0"
         app:layout_constraintEnd_toStartOf="@id/button_div"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_equal"
+        app:text="@string/comma" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_div"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/div"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider4"
-        app:layout_constraintBottom_toTopOf="@id/horizontalDivider5"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider43"
+        app:layout_constraintTop_toBottomOf="@id/button_mul"
+        app:layout_constraintStart_toEndOf="@id/button_comma"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toTopOf="@id/button_back"
+        app:text="@string/div" />
 
     <!--Fifth row-->
 
-    <View
-        android:id="@+id/horizontalDivider5"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/button_0"
-        app:layout_constraintBottom_toTopOf="@id/button_equal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_equal"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/equal"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider5"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_reset"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/verticalDivider51"
-        />
-
-    <View
-        android:id="@+id/verticalDivider51"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/divider_color"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider5"
+        app:layout_constraintEnd_toStartOf="@id/button_back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_comma"
-        app:layout_constraintEnd_toStartOf="@id/button_div"
-        />
+        app:text="@string/equal" />
 
-    <TextView
+    <com.revotechs.calculator.customview.CalculatorButton
         android:id="@+id/button_back"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/back"
-        android:gravity="center_vertical|center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalDivider5"
+        app:layout_constraintTop_toBottomOf="@id/button_div"
+        app:layout_constraintStart_toStartOf="@id/button_div"
+        app:layout_constraintEnd_toEndOf="@id/button_div"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalDivider51"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:text="@string/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

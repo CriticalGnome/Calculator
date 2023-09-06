@@ -5,7 +5,6 @@
 
     <application
         android:allowBackup="true"
-        android:fullBackupContent="false"
         android:icon="@mipmap/calc_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/calc_icon"
@@ -15,7 +14,8 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

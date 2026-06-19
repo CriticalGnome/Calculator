@@ -2,16 +2,15 @@
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
 }
 
 android {
     namespace = "com.revotechs.calculator"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.revotechs.calculator"
         minSdk = 23
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 3
         versionName = "2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -29,19 +28,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
 
-    kotlinOptions {
-        jvmTarget = "17"
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 
 dependencies {
     // Core
-    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.core:core-ktx:1.19.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
     implementation("androidx.fragment:fragment-ktx:1.8.9")
-    implementation("com.google.android.material:material:1.13.0")
+    implementation("com.google.android.material:material:1.14.0")
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")

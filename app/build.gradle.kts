@@ -11,8 +11,8 @@ android {
         applicationId = "com.revotechs.calculator"
         minSdk = 23
         targetSdk = 37
-        versionCode = 3
-        versionName = "2.0"
+        versionCode = 5
+        versionName = "2.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
